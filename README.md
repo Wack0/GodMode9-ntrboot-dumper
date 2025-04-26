@@ -1,3 +1,11 @@
+This is a hacked up fork of GM9 for dumping ntrboot carts.
+
+As committed, will build the version to dump TWL/DSi ntrboot carts.
+
+For building a version to dump CTR/3DS ntrboot carts, modify the defines at `arm9/source/gamecart/secure_ntr.c` line 601 (change `USE_TWL_FIRM` define to 0) and line 608 (keep `CTR_DEV` as 1 to build a dumper for CTR dev ntrboot carts, change it to 0 to build a dumper for CTR prod ntrboot carts)
+
+The correct dump is the `.nds.enc` file - this is required for TWL ntrboot carts in particular as the code starts in the secure area, crypted by TWL AES keyslot 2. 
+
 # ![GodMode9](https://github.com/d0k3/GodMode9/blob/master/resources/logo.png)
 _A full access file browser for the 3DS console_ :godmode:
 

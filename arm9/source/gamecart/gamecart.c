@@ -246,7 +246,7 @@ u32 InitCartRead(CartData* cdata) {
         TwlHeader* nds_header = (void*)cdata->header;
         u8 secure_area_enc[0x4000];
         NTR_CmdReadHeader(cdata->header);
-        if (!(*(cdata->header))) return 1; // error reading the header
+	// don't check the header first byte, it being zero is valid for ntrboot images
         if (!NTR_Secure_Init(cdata->header, secure_area_enc, Cart_GetID(), 0)) return 1;
 
 
@@ -258,7 +258,7 @@ u32 InitCartRead(CartData* cdata) {
         cdata->arm9i_rom_offset = 0;
 
         // TWL header
-        if (nds_header->unit_code != 0x00) { // DSi or NDS+DSi
+        if (false && nds_header->unit_code != 0x00) { // DSi or NDS+DSi
             cdata->cart_type |= CART_TWL;
             cdata->data_size = nds_header->ntr_twl_rom_size;
             cdata->arm9i_rom_offset = nds_header->arm9i_rom_offset;
